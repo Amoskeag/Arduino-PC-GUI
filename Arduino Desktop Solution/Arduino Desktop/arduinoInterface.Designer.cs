@@ -33,11 +33,9 @@
             this.stopTestBtn = new System.Windows.Forms.Button();
             this.groupBoxData = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.axialLoadCellLabel = new System.Windows.Forms.Label();
             this.latLoadCellLabel = new System.Windows.Forms.Label();
             this.dialIndicatorLabel = new System.Windows.Forms.Label();
-            this.textBoxDialIndicator = new System.Windows.Forms.TextBox();
             this.groupBoxSettings = new System.Windows.Forms.GroupBox();
             this.lblState = new System.Windows.Forms.Label();
             this.lblStopBits = new System.Windows.Forms.Label();
@@ -60,6 +58,8 @@
             this.comPortSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activePort = new System.IO.Ports.SerialPort(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxDialIndicator = new System.Windows.Forms.TextBox();
             this.groupBoxData.SuspendLayout();
             this.groupBoxSettings.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -107,13 +107,6 @@
             this.textBox2.Size = new System.Drawing.Size(149, 22);
             this.textBox2.TabIndex = 5;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(207, 73);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(149, 22);
-            this.textBox1.TabIndex = 4;
-            // 
             // axialLoadCellLabel
             // 
             this.axialLoadCellLabel.AutoSize = true;
@@ -140,13 +133,6 @@
             this.dialIndicatorLabel.Size = new System.Drawing.Size(124, 17);
             this.dialIndicatorLabel.TabIndex = 1;
             this.dialIndicatorLabel.Text = "Dial Indicator Data";
-            // 
-            // textBoxDialIndicator
-            // 
-            this.textBoxDialIndicator.Location = new System.Drawing.Point(207, 37);
-            this.textBoxDialIndicator.Name = "textBoxDialIndicator";
-            this.textBoxDialIndicator.Size = new System.Drawing.Size(149, 22);
-            this.textBoxDialIndicator.TabIndex = 0;
             // 
             // groupBoxSettings
             // 
@@ -351,6 +337,20 @@
             // 
             this.activePort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.activePort_DataReceived);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(207, 73);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(149, 22);
+            this.textBox1.TabIndex = 4;
+            // 
+            // textBoxDialIndicator
+            // 
+            this.textBoxDialIndicator.Location = new System.Drawing.Point(207, 37);
+            this.textBoxDialIndicator.Name = "textBoxDialIndicator";
+            this.textBoxDialIndicator.Size = new System.Drawing.Size(149, 22);
+            this.textBoxDialIndicator.TabIndex = 0;
+            // 
             // arduinoInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -381,11 +381,9 @@
         private System.Windows.Forms.Button stopTestBtn;
         private System.Windows.Forms.GroupBox groupBoxData;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label axialLoadCellLabel;
         private System.Windows.Forms.Label latLoadCellLabel;
         private System.Windows.Forms.Label dialIndicatorLabel;
-        private System.Windows.Forms.TextBox textBoxDialIndicator;
         private System.Windows.Forms.GroupBox groupBoxSettings;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -408,6 +406,8 @@
         private System.Windows.Forms.Label lblParity;
         private System.Windows.Forms.Label lblBaudRate;
         private System.Windows.Forms.Label lblPortData;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxDialIndicator;
     }
 }
 

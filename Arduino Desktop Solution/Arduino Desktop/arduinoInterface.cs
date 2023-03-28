@@ -45,14 +45,8 @@ namespace Arduino_Desktop
             lblStopBits.Text = activePort.StopBits.ToString();
             lblState.Text = state;
 
-            /*could be more interactive, not gonna worry about it.
-            MessageBox.Show("Port:\t\t" + activePort.PortName +
-                            "\nBaud Rate:\t" + activePort.BaudRate +
-                            "\nData Bits:\t" + activePort.DataBits +
-                            "\nStop Bits:\t" + activePort.StopBits +
-                            "\nParity:\t\t" + activePort.Parity +
-                            "\nHandshaking:\t" + activePort.Handshake.ToString() +
-                            "\nState:\t\t" + state, "Port Settings");*/
+            stopTestBtn.Enabled = false;
+            testBtn.Enabled = true;
 
         }
 
@@ -75,6 +69,8 @@ namespace Arduino_Desktop
         private void stopTestBtn_Click(object sender, EventArgs e)
         {
             //Stop the testing loop.
+            stopTestBtn.Enabled = false;
+            testBtn.Enabled = true;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -112,7 +108,8 @@ namespace Arduino_Desktop
 
             //if not "MessageBox.Show("The serial port must be opened before data can be written.");" No device connected.
             //return.
-
+            testBtn.Enabled = false;
+            stopTestBtn.Enabled = true;
 
 
         }
@@ -203,11 +200,49 @@ namespace Arduino_Desktop
             return dataRead;
         }
 
+        //creates the data packet everything is cast as a byte so I dont need to worry about messing with other data types.
+        //after looking online Im not sure why ref is needed
+        private void CreatePacket(string message, ref byte[] packet, ref int packetLen)
+        {
+            byte num = (byte)(message.Length + 3); //make room for header, length, and crc.
+            packetLen = (int)num;
+            packet = new byte[(int)num];
+            Encoding.ASCII.GetBytes(message, 0, message.Length, packet, 2);
+            packet[0] = (byte)1;    //header
+            packet[1] = num;        //length
+            CRC_Class crcClass = new CRC_Class(packet);
+            packet[packet.Length - 1] = (byte)crcClass.crcCalc();  //crc
+
+            rTxtBoxSent.AppendText("SENT CRC: " + packet[packet.Length - 1]);
+
+        }
+
+        /*put the packet data into the rtextbox.
+        private string ReadPacket(byte[] packet)
+        {
+            CRC_Class crcClass = new CRC_Class(packet);
+            byte check = (byte)crcClass.crcCalc();  //crc
+
+            if (check != (byte)0)
+            {
+                //good data.
+                MessageBox.Show("Transmission Error!");
+            }
+
+            packet[packet.Length - 1] = (byte)0;
+            rTxtBoxRecieve.AppendText("MESSAGE: " + Encoding.ASCII.GetString(packet, 2, packet.Length - 2));
+            rTxtBoxRecieve.AppendText("\nCRC CHECK: " + check);
+            rTxtBoxRecieve.AppendText("\nLENGTH OF DATA: " + (packet.Length - 1));
+            //I have some work to do this return is really not nessesary and I broke my code a lot
+            //this is really patchy work on my part D:
+            return "";
+        }*/
+
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //about information
             MessageBox.Show("Arduino Desktop\n\nVersion 1.0\n\nProgrammer: Arthur W. Aznive Jr.", "About");
         }
-
     }
 }
