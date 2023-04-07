@@ -129,10 +129,13 @@ namespace Arduino_Desktop
 
             ///this only works with standard settings.
             ///
-            rTxtBoxRecieve.Invoke(new EventHandler(delegate
-            {
-                rTxtBoxRecieve.AppendText(ProcessPacket());
-            }));
+
+
+
+            //rTxtBoxRecieve.Invoke(new EventHandler(delegate
+            //{
+            //    rTxtBoxRecieve.AppendText(ProcessPacket());
+            //}));
 
 
         }
@@ -150,7 +153,7 @@ namespace Arduino_Desktop
                 {
                     //header
                     //header = num.ToString();
-                    rTxtBoxRecieve.AppendText("HEADER: " + num + "\n");
+                    //rTxtBoxRecieve.AppendText("HEADER: " + num + "\n");
                     state_info.state = STATE.GET_HEADER;
                 }
 
@@ -188,7 +191,7 @@ namespace Arduino_Desktop
                         ++state_info.nextByte;
                         if (state_info._expecting <= 0)
                         {
-                            dataRead = ReadPacket(state_info.recvPacket);
+                            //dataRead = ReadPacket(state_info.recvPacket);
                             state_info.state = STATE.GET_HEADER;
                             break;
                         }
@@ -210,10 +213,10 @@ namespace Arduino_Desktop
             Encoding.ASCII.GetBytes(message, 0, message.Length, packet, 2);
             packet[0] = (byte)1;    //header
             packet[1] = num;        //length
-            CRC_Class crcClass = new CRC_Class(packet);
-            packet[packet.Length - 1] = (byte)crcClass.crcCalc();  //crc
+            //CRC_Class crcClass = new CRC_Class(packet);
+   /*         packet[packet.Length - 1] = (byte)crcClass.crcCalc(); */ //crc
 
-            rTxtBoxSent.AppendText("SENT CRC: " + packet[packet.Length - 1]);
+            //rTxtBoxSent.AppendText("SENT CRC: " + packet[packet.Length - 1]);
 
         }
 
